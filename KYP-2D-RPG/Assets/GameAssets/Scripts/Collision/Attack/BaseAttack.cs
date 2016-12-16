@@ -51,7 +51,7 @@ public class BaseAttack : MonoBehaviour {
         if (r > criVal) isCri = false;
 
         //check damage
-        double damage = atkBv.Atk - defBv.Def;
+        double damage = atkBv.Atk * Random.Range(0.8f, 1.2f) - defBv.Def;
 
         if(isCri)
         {

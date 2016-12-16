@@ -82,6 +82,7 @@
     <Compile Include="Assets\GameAssets\Scripts\Entity\Entity.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Ui\Controller\AvatarController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Ui\CustomButton.cs" />
+    <Compile Include="Assets\SimpleParticlePack\Scripts\ParticleTester.cs" />
     <Compile Include="Assets\StoredAssets\Medieval_Warriors_Pack\Scripts\Camera16x9.cs" />
     <Compile Include="Assets\StoredAssets\Medieval_Warriors_Pack\Scripts\Example_Motion_Attack_Shield_Controller.cs" />
     <Compile Include="Assets\StoredAssets\Medieval_Warriors_Pack\Scripts\Example_Motion_Controller.cs" />
