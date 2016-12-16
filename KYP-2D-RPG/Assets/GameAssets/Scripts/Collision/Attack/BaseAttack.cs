@@ -38,7 +38,8 @@ public class BaseAttack : MonoBehaviour {
         if(!isHit)
         {
             // 여기서 미스 이팩트
-            Debug.Log("miss");
+            //Debug.Log("miss");
+            EffectMgr.Instance.GenerateEffect(EffectMgr.EFFECT_TYPE.EFFECT_TYPE_FONT_MISS, DefObj.transform.position);
             return;
         }
 
@@ -54,14 +55,24 @@ public class BaseAttack : MonoBehaviour {
 
         if(isCri)
         {
-            Debug.Log("Cri!");
+            //Debug.Log("Cri!");
             damage *= atkBv.CriDmgRatio;
         }
 
         //update hp
         defBv.CurHp -= damage;
+        EffectMgr.EffectData data = new EffectMgr.EffectData();
+        data.number = damage;
         //여기서 데미지 이팩트 및 데미지 폰트 처리
-
-        Debug.Log("attack!");
+        if (isCri)
+        {
+            EffectMgr.Instance.GenerateEffect(EffectMgr.EFFECT_TYPE.EFFECT_TYPE_FONT_CRITICAL, DefObj.transform.position, data);
+        }
+        else
+        {
+            EffectMgr.Instance.GenerateEffect(EffectMgr.EFFECT_TYPE.EFFECT_TYPE_FONT_NORMAL, DefObj.transform.position, data);
+        }
+        
+        //Debug.Log("attack!");
     }
 }
