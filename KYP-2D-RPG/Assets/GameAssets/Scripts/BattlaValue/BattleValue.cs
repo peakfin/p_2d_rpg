@@ -6,7 +6,6 @@ public class BattleValue : MonoBehaviour {
     public double MaxHp; //최대 체력
     public double CurHp; //현 체력
 
-
     //크리티컬은 CriRatio - RegCriRatio 확률로계산한다.
     //데미지는 Atk - Def 계산 후 크리티컬시 CriDmgRatio 를 곱한다.
     public double Atk; // 공격력
