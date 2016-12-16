@@ -67,10 +67,12 @@ public class BaseAttack : MonoBehaviour {
         if (isCri)
         {
             EffectMgr.Instance.GenerateEffect(EffectMgr.EFFECT_TYPE.EFFECT_TYPE_FONT_CRITICAL, DefObj.transform.position, data);
+            EffectMgr.Instance.GenerateEffect(EffectMgr.EFFECT_TYPE.EFFECT_CRITICAL_ATTACK, coll.contacts[0].point);
         }
         else
         {
             EffectMgr.Instance.GenerateEffect(EffectMgr.EFFECT_TYPE.EFFECT_TYPE_FONT_NORMAL, DefObj.transform.position, data);
+            EffectMgr.Instance.GenerateEffect(EffectMgr.EFFECT_TYPE.EFFECT_NORMAL_ATTACK, coll.contacts[0].point);
         }
         
         //Debug.Log("attack!");

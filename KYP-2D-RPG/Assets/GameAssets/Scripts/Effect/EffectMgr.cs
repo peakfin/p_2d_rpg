@@ -12,6 +12,8 @@ public class EffectMgr : MonoBehaviour {
         EFFECT_TYPE_FONT_MISS,
         EFFECT_TYPE_FONT_NORMAL,
         EFFECT_TYPE_FONT_CRITICAL,
+        EFFECT_NORMAL_ATTACK,
+        EFFECT_CRITICAL_ATTACK,
     }
 
     public struct EffectData
@@ -36,7 +38,20 @@ public class EffectMgr : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-	
+	    for(int i = 0; i < Effects.transform.childCount; i++)
+        {
+            GameObject obj = Effects.transform.GetChild(i).gameObject;
+            if (obj.tag != "ParticleEffect")
+            {
+                continue;
+            }
+
+            ParticleSystem ptc = obj.GetComponent<ParticleSystem>();
+            if (ptc.time >= ptc.duration)
+            {
+                Destroy(obj);
+            }
+        }
 	}
 
     public void GenerateEffect(EFFECT_TYPE type, Vector3 pos = new Vector3(), EffectData data = new EffectData())
@@ -52,7 +67,34 @@ public class EffectMgr : MonoBehaviour {
             case EFFECT_TYPE.EFFECT_TYPE_FONT_CRITICAL:
                 GenerateCriticalNumEffect(pos, data.number);
                 break;
+            case EFFECT_TYPE.EFFECT_CRITICAL_ATTACK:
+                GenerateCriticalAttackEffect(pos);
+                break;
+            case EFFECT_TYPE.EFFECT_NORMAL_ATTACK:
+                GenerateNormalAttackEffect(pos);
+                break;
         }
+    }
+    void GenerateCriticalAttackEffect(Vector3 pos)
+    {
+        GenerateAttackEffect(pos, "Critical");
+    }
+
+    void GenerateNormalAttackEffect(Vector3 pos)
+    {
+        GenerateAttackEffect(pos, "Normal");
+    }
+
+    void GenerateAttackEffect(Vector3 pos, string path)
+    {
+        GameObject Prefab = Resources.Load("Effect/AttackEffect/" + path + "AttackEffect") as GameObject;
+
+        GameObject Obj = Instantiate(Prefab) as GameObject;
+
+        Obj.transform.parent = Effects.transform;
+        Obj.tag = "ParticleEffect";
+        Obj.transform.position = pos;
+        
     }
 
     void GenerateMissEffect(Vector3 pos)
