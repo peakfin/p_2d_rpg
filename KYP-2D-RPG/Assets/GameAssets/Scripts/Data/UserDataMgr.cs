@@ -1,87 +1,413 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+
+
 public class UserDataMgr : MonoBehaviour {
 
-    static UserDataMgr Instance = null;
+    public Text TextEnchant;
+    string[] ArrStrStatus = {
+        "Lv",
+        "Exp",
+        "MaxHp",
+        "CurHp",
+        "Atk",
+        "CriRatio",
+        "CriDmgRatio",
+        "Def",
+        "RegCriRatio",
+        "Dot",
+        "Hit",
+        "MonsterLv",
+        "MonsterStatus",
+        "Enchant"
+    };
 
-    Dictionary<string, string> SavaData = new Dictionary<string, string>();
+    public long AvatarNeedExp
+    {
+        get
+        {
+            long num = Lv * Lv * Lv * 100;
+            int cnt = 10;
+            for (int i = 1; ; i++)
+            {
+                if (Lv < cnt * i)
+                {
+                    num /= cnt * i;
+                    break;
+                }
+            }
+            return num;
+        }
+    }
+    public long MonsterNeedExp
+    {
+        get
+        {
+            long monLv = MonsterLv;
+            long exp = monLv * monLv * monLv * 10;
+            for (int i = 1; ; i++)
+            {
+                if (monLv < i * 10)
+                {
+                    exp /= i * 10;
+                    break;
+                }
+            }
+            exp *= 5;
+            return exp;
+        }
+    }
+    public long MonGenNeedExp
+    {
+        get
+        {
+            long monLv = MonsterLv;
+            long exp = monLv * monLv * monLv * 10;
+            for (int i = 1; ; i++)
+            {
+                if (monLv < i * 10)
+                {
+                    exp /= i * 10;
+                    break;
+                }
+            }
+            exp *= 5;
+            return exp;
+        }
+    }
+    public long FullHpExp
+    {
+        get
+        {
+            long num = Lv * Lv * Lv * 100;
+            int cnt = 10;
+            for (int i = 1; ; i++)
+            {
+                if (Lv < cnt * i)
+                {
+                    num /= cnt * i;
+                    break;
+                }
+            }
+            return num/2;
+        }
+    }
 
-    public double MaxHp; //최대 체력
-    public double CurHp; //현 체력
+    static public UserDataMgr Instance = null;
 
-    //크리티컬은 CriRatio - RegCriRatio 확률로계산한다.
-    //데미지는 Atk - Def 계산 후 크리티컬시 CriDmgRatio 를 곱한다.
-    public double   Atk;            // 공격력
-    public float    CriRatio;       // 크리티컬 확률 %
-    public float    CriDmgRatio;    // 크리티컬 데미지율 공격력에 곱해서 사용한다
-    public double   Def;            // 방어력
-    public float    RegCriRatio;    // 크리티컬 저항 확률 %
+    Dictionary<string, string> DicSaveData = new Dictionary<string, string>();
+    
+    public int Enchant
+    {
+        get
+        {
+            int ret = 0;
+            if(int.TryParse(DicSaveData["Enchant"], out ret))
+            {
+                return ret;
+            }
+            return 0;
+        }
+        set
+        {
+            DicSaveData["Enchant"] = value.ToString();
+        }
+    }
+    public long Lv
+    {
+        get
+        {
+            long ret = 1;
+            if(long.TryParse(DicSaveData["Lv"], out ret))
+            {
+                return ret;
+            }
+            return 1;
+        }
+        set
+        {
+            DicSaveData["Lv"] = value.ToString();
+        }
+    }
+
+    public long Exp
+    {
+        get
+        {
+            long ret = 0;
+            if(long.TryParse(DicSaveData["Exp"], out ret))
+            {
+                return ret;
+            }
+            return 0;
+        }
+        set
+        {
+            DicSaveData["Exp"] = value.ToString();
+        }
+    }
+
+    public double MaxHp {
+        get
+        {
+            double ret = 1000;
+            if(double.TryParse(DicSaveData["MaxHp"], out ret))
+            {
+                return ret;
+            }
+            return 1000;
+        }
+        set
+        {
+            DicSaveData["MaxHp"] = value.ToString();
+        }
+    } 
+    //최대 체력
+    public double CurHp
+    {
+        get
+        {
+            double ret = 1000;
+            if (double.TryParse(DicSaveData["CurHp"], out ret))
+            {
+                return ret;
+            }
+            return 1000;
+        }
+        set
+        {
+            DicSaveData["CurHp"] = value.ToString();
+        }
+    } 
+    //현 체력
+
+
+    public double   Atk
+    {
+        get
+        {
+            double ret = 100;
+            if (double.TryParse(DicSaveData["Atk"], out ret))
+            {
+                return ret;
+            }
+            return 100;
+        }
+        set
+        {
+            DicSaveData["Atk"] = value.ToString();
+        }
+    }
+    public float    CriRatio
+    {
+        get
+        {
+            float ret = 10;
+            if (float.TryParse(DicSaveData["CriRatio"], out ret))
+            {
+                return ret;
+            }
+            return 10;
+        }
+        set
+        {
+            DicSaveData["CriRatio"] = value.ToString();
+        }
+    }
+    public float    CriDmgRatio
+    {
+        get
+        {
+            float ret = 1.1f;
+            if (float.TryParse(DicSaveData["CriDmgRatio"], out ret))
+            {
+                return ret;
+            }
+            return 1.1f;
+        }
+        set
+        {
+            DicSaveData["CriDmgRatio"] = value.ToString();
+        }
+    }
+    public double   Def
+     {
+        get
+        {
+            double ret = 0;
+            if (double.TryParse(DicSaveData["Def"], out ret))
+            {
+                return ret;
+            }
+            return 0;
+        }
+        set
+        {
+            DicSaveData["Def"] = value.ToString();
+        }
+    }          
+    public float    RegCriRatio
+    {
+        get
+        {
+            float ret = 0;
+            if (float.TryParse(DicSaveData["RegCriRatio"], out ret))
+            {
+                return ret;
+            }
+            return 0;
+        }
+        set
+        {
+            DicSaveData["RegCriRatio"] = value.ToString();
+        }
+    }
 
 
     // 회피확률은 Hit-Dot 로 처리한다.
-    public float Dot; // 회피율 %
-    public float Hit; // 명중률 %
+    public float Dot // 회피율 %
+    {
+        get
+        {
+            float ret = 20;
+            if (float.TryParse(DicSaveData["Dot"], out ret))
+            {
+                return ret;
+            }
+            return 20;
+        }
+        set
+        {
+            DicSaveData["Dot"] = value.ToString();
+        }
+    }
+    public float Hit // 명중률 %
+    {
+        get
+        {
+            float ret = 100;
+            if (float.TryParse(DicSaveData["Hit"], out ret))
+            {
+                return ret;
+            }
+            return 100;
+        }
+        set
+        {
+            DicSaveData["Hit"] = value.ToString();
+        }
+    }
 
-    // Use this for initialization
-    void Start () {
-	    if (Instance == null)
+    public long MonsterLv
+    {
+        get
+        {
+            long ret = 1;
+            if (long.TryParse(DicSaveData["MonsterLv"], out ret))
+            {
+                return ret;
+            }
+            return 1;
+        }
+        set
+        {
+            DicSaveData["MonsterLv"] = value.ToString();
+        }
+    }
+
+    public string MonsterStatus
+    {
+        get
+        {
+            string ret = DicSaveData["MonsterStatus"];
+            return ret;
+        }
+        set
+        {
+            DicSaveData["MonsterStatus"] = value.ToString();
+        }
+    }
+    void Awake()
+    {
+        if (Instance == null)
         {
             Instance = this;
             Init();
         }
+    }
+    // Use this for initialization
+    void Start () {
+	    
 	}
 
     void Init()
     {
         //data load
-
+        LoadData();
     }
 
     void LoadData()
     {
-        if(!double.TryParse(PlayerPrefs.GetString("MaxHp"), out MaxHp))
+        //PlayerPrefs.DeleteAll();
+        for (int i = 0; i < ArrStrStatus.Length; i++)
         {
-            MaxHp = 1000;
+            DicSaveData.Add(ArrStrStatus[i], PlayerPrefs.GetString(ArrStrStatus[i]));
         }
-        if(!double.TryParse(PlayerPrefs.GetString("CurHp"), out CurHp))
-        {
-            CurHp = 1000;
-        }
-        if (!double.TryParse(PlayerPrefs.GetString("Atk"), out Atk))
-        {
-            Atk = 100;
-        }
-        if (!float.TryParse(PlayerPrefs.GetString("CriRatio"), out CriRatio))
-        {
-            CriRatio = 5;
-        }
-        if (!float.TryParse(PlayerPrefs.GetString("CriDmgRatio"), out CriDmgRatio))
-        {
-            CriDmgRatio = 1.1f;
-        }
-        if (!double.TryParse(PlayerPrefs.GetString("Def"), out Def))
-        {
-            Def = 0;
-        }
-        if (!float.TryParse(PlayerPrefs.GetString("RegCriRatio"), out RegCriRatio))
-        {
-            RegCriRatio = 0;
-        }
-        if (!float.TryParse(PlayerPrefs.GetString("Dot"), out Dot))
-        {
-            Dot = 10;
-        }
+        Debug.Log(" [ KYP ] Load Data");
+    }
 
-        if (!float.TryParse(PlayerPrefs.GetString("Hit"), out Hit))
+    public void SaveData()
+    {
+        DicSaveData.ToString();
+        for (int i = 0; i < ArrStrStatus.Length; i++)
         {
-            Hit = 80;
+            PlayerPrefs.SetString(ArrStrStatus[i], DicSaveData[ArrStrStatus[i]]);
         }
-
+        PlayerPrefs.Save();
+        Debug.Log(" [ KYP ] Save Data");
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
+        TextEnchant.text = string.Format("+{0}", Enchant);
 	}
+
+    public void StatsUp(string status)
+    {
+        //성장치는 테이블관리로 변경하자
+        switch (status)
+        {
+            case "MaxHp":
+                MaxHp += 10;
+                break;
+            case "Atk":
+                Atk += 10;
+                break;
+            case "Def":
+                Def += 10;
+                break;
+            case "CriRatio":
+                CriRatio += 1;
+                break;
+            case "CriDmgRatio":
+                CriDmgRatio += 0.1f;
+                break;
+            case "RegCriRatio":
+                RegCriRatio += 0.5f;
+                break;
+            case "Hit":
+                Hit += 1;
+                break;
+            case "Dot":
+                Dot += 1;
+                break;
+            default:
+                Debug.Log("test");
+                break;
+        }
+        Lv += 1;
+        SaveData();
+    }
 }

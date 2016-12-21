@@ -59,6 +59,11 @@ public class BaseAttack : MonoBehaviour {
             damage *= atkBv.CriDmgRatio;
         }
 
+        if(AtkObj.tag == "Player")
+        {
+            damage += UserDataMgr.Instance.Enchant * atkBv.Atk;
+        }
+
         //update hp
         defBv.CurHp -= damage;
         EffectMgr.EffectData data = new EffectMgr.EffectData();

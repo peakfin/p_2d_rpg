@@ -67,11 +67,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameAssets\Scripts\Ai\Ai.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Ai\AiState.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Ai\AiStateAttack.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Ai\AiStateFind.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Ai\AiStateIdle.cs" />
-    <Compile Include="Assets\GameAssets\Scripts\Ai\AiStateWalk.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Ai\AiState\AiState.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Ai\AiState\AiStateAttack.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Ai\AiState\AiStateFind.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Ai\AiState\AiStateIdle.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Ai\AiState\AiStateWalk.cs" />
     <Compile Include="Assets\GameAssets\Scripts\BattlaValue\BattleValue.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Behavior\Effect\DamageFont\DamageFont.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Collision\Attack\BaseAttack.cs" />
@@ -80,12 +80,17 @@
     <Compile Include="Assets\GameAssets\Scripts\Entity\Avatar.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Entity\Enemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Entity\Entity.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Generator\EnemyGenerator.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Ui\Controller\AvatarController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Ui\CustomButton.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Ui\GeneralPopup.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Ui\Menu\UI_Background.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Ui\Menu\UI_Enchant.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Ui\Menu\UI_Enemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Ui\Menu\UI_Menu.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Ui\Menu\UI_Shop.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Ui\Menu\UI_Status.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Ui\TextLayerSetter.cs" />
     <Compile Include="Assets\StoredAssets\Medieval_Warriors_Pack\Scripts\Camera16x9.cs" />
     <Compile Include="Assets\StoredAssets\Medieval_Warriors_Pack\Scripts\Example_Motion_Attack_Shield_Controller.cs" />
     <Compile Include="Assets\StoredAssets\Medieval_Warriors_Pack\Scripts\Example_Motion_Controller.cs" />

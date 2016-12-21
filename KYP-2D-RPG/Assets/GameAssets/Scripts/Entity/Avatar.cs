@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Avatar : Entity
 {
@@ -22,6 +23,26 @@ public class Avatar : Entity
         mat.bounciness = 0;
         mat.friction = 0;
         GetComponent<CircleCollider2D>().sharedMaterial = mat;
+
+        InitBattleValue();
+    }
+
+    public void InitBattleValue(bool widoutCurHp = false)
+    {
+        BattleValue Bv = GetComponent<BattleValue>();
+        if (Bv == null) return;
+
+        Bv.Lv = UserDataMgr.Instance.Lv;
+        Bv.Exp = UserDataMgr.Instance.Exp;
+        Bv.Atk = UserDataMgr.Instance.Atk;
+        Bv.Def = UserDataMgr.Instance.Def;
+        Bv.CriRatio = UserDataMgr.Instance.CriRatio;
+        Bv.CriDmgRatio = UserDataMgr.Instance.CriDmgRatio;
+        Bv.RegCriRatio = UserDataMgr.Instance.RegCriRatio;
+        Bv.Hit = UserDataMgr.Instance.Hit;
+        Bv.Dot = UserDataMgr.Instance.Dot;
+        Bv.MaxHp = UserDataMgr.Instance.MaxHp;
+        if(!widoutCurHp) Bv.CurHp = UserDataMgr.Instance.CurHp;    
     }
 	
 	// Update is called once per frame
@@ -29,6 +50,13 @@ public class Avatar : Entity
         UpdateVel();
         UpdateAnim();
         UpdateDir();
+    }
+
+    void LateUpdate()
+    {
+        BattleValue Bv = GetComponent<BattleValue>();
+        if (Bv == null) return;
+        UserDataMgr.Instance.CurHp = Bv.CurHp;
     }
 
     
@@ -140,5 +168,28 @@ public class Avatar : Entity
             if (isGround)
                 Vel.y = 0;
         }
+    }
+
+    override protected void Die()
+    {
+        Destroy(GetComponent<Rigidbody2D>());
+        Destroy(GetComponent<CircleCollider2D>());
+        if (transform.FindChild("HpBack") != null)
+        {
+            GameObject HpBar = transform.FindChild("HpBack").gameObject;
+            HpBar.SetActive(false);
+        }
+
+        UserDataMgr.Instance.CurHp = UserDataMgr.Instance.MaxHp;
+        UserDataMgr.Instance.Exp = 0;
+        UserDataMgr.Instance.SaveData();
+        GeneralPopup.Instance.OpenPopup(
+            GeneralPopup.POPUP_STYLE.POPUP_STYLE_ONEBTN,
+            "죽었습니다. 경험치를 잃었습니다.",
+            () => {
+                int scene = SceneManager.GetActiveScene().buildIndex;
+                SceneManager.LoadScene(scene, LoadSceneMode.Single);
+            }
+        );
     }
 }

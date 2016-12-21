@@ -5,6 +5,7 @@ public class Enemy : Entity
 {
     public bool OnAttack = false;
     Ai ai;
+    public long Exp;
     // Use this for initialization
     void Start()
     {
@@ -25,12 +26,40 @@ public class Enemy : Entity
         GetComponent<CircleCollider2D>().sharedMaterial = mat;
 
         ai = GetComponent<Ai>();
+        InitBattleValue();
+    }
+
+    void InitBattleValue()
+    {
+        //레벨에따른 능력치 여기서 셋팅
+        BattleValue bv = GetComponent<BattleValue>();
+        long lv = UserDataMgr.Instance.MonsterLv;
+        bv.Lv = lv;
+        bv.MaxHp = 500 + (lv - 1) * 10;
+        bv.CurHp = bv.MaxHp;
+        bv.Atk = 50 + (lv - 1) * 10;
+        bv.Def = (lv - 1) * 5;
+        bv.CriRatio = (lv - 1) * 1;
+        bv.CriDmgRatio = 1 + (lv - 1) * 0.1f;
+        bv.CriRatio = (lv - 1) * 0.1f;
+        bv.Hit = 70 + (lv - 1) * 1;
+        bv.Dot = (lv - 1) * 0.5f;
+        Exp = lv * lv * lv * 10;
+        for(int i = 1; ;i++)
+        {
+            if (lv < i * 10)
+            {
+                Exp /= i * 10;
+                break;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         if (ai != null && !IsDie()) ai.Process();
+
         UpdateVel();
         UpdateAnim();
         UpdateDir();
@@ -146,12 +175,24 @@ public class Enemy : Entity
 
     override protected void Die()
     {
+        if(GetComponent<Rigidbody2D>() == null ||
+            GetComponent<CircleCollider2D>() == null ||
+            GetComponent<Ai>() == null)
+        {
+            return;
+        }
+
         Destroy(GetComponent<Rigidbody2D>());
         Destroy(GetComponent<CircleCollider2D>());
+        Destroy(GetComponent<Ai>());
         if (transform.FindChild("HpBack") != null)
         {
             GameObject HpBar = transform.FindChild("HpBack").gameObject;
             HpBar.SetActive(false);
         }
+
+        UserDataMgr.Instance.Exp += Exp;
+        EnemyGenerator.Instance.RemoveMonster(transform.parent.name);
+
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class BattleValue : MonoBehaviour {
+    public long Lv;
+    public long Exp;
 
     public double MaxHp; //최대 체력
     public double CurHp; //현 체력
@@ -35,6 +37,10 @@ public class BattleValue : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(tag == "Player")
+        {
+            GetComponent<Avatar>().InitBattleValue(true);
+        }
         if (HpBar != null)
         {
             if (CurHp < 0) CurHp = 0;
