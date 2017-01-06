@@ -21,25 +21,15 @@ public class UI_Enchant : UI_Background
 
     long GetNeedExp()
     {
-        int lv = UserDataMgr.Instance.Enchant;
-        long exp = (lv + 1) * (lv + 1) * (lv + 1) * 10;
-        for (int i = 1; ; i++)
-        {
-            if (lv < i * 10)
-            {
-                exp /= i * 10;
-                break;
-            }
-        }
-        exp *= 15;
-        return exp;
+        return UserDataMgr.Instance.EnchentExp; ;
     }
 
 
 
     public void EnchantSowrd()
     {
-        long exp = GetNeedExp();
+        long exp = UserDataMgr.Instance.EnchentExp;
+        //exp = 0;
      
         GeneralPopup.Instance.OpenPopup(
             GeneralPopup.POPUP_STYLE.POPUP_STYLE_TWOBTN,

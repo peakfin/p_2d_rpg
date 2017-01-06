@@ -91,14 +91,34 @@ public class UserDataMgr : MonoBehaviour {
                     break;
                 }
             }
-            return num/2;
+            return num / 2;
         }
     }
 
-    static public UserDataMgr Instance = null;
+    public long EnchentExp
+    {
+        get
+        {
+            int lv = UserDataMgr.Instance.Enchant;
+            long exp = (lv + 1) * (lv + 1) * (lv + 1) * 10;
+            for (int i = 1; ; i++)
+            {
+                if (lv < i * 10)
+                {
+                    exp /= i * 10;
+                    break;
+                }
+            }
+            exp *= 15;
+            return exp;
+        }
+    }
 
+
+    static public UserDataMgr Instance = null;
+   
     Dictionary<string, string> DicSaveData = new Dictionary<string, string>();
-    
+
     public int Enchant
     {
         get

@@ -20,6 +20,12 @@ public class UI_Enemy : UI_Background
         EnemyGenerator.Instance.GenerateEnemys(false);
     }
 
+    public void ShowAdsAndGenEnemy()
+    {
+        //todo show ads
+        EnemyGenerator.Instance.GenerateEnemys(false, true);
+    }
+
     public void LevelUpMonster()
     {
         long monLv = UserDataMgr.Instance.MonsterLv;
@@ -48,6 +54,7 @@ public class UI_Enemy : UI_Background
                 else
                 {
                     UserDataMgr.Instance.Exp -= exp;
+                    UserDataMgr.Instance.MonsterLv += 1;
                     UserDataMgr.Instance.SaveData();
                     GeneralPopup.Instance.OpenPopup(
                         GeneralPopup.POPUP_STYLE.POPUP_STYLE_ONEBTN,

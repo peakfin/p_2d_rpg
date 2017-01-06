@@ -37,7 +37,7 @@ public class EnemyGenerator : MonoBehaviour {
 	
 	}
 
-    public void GenerateEnemys(bool isStart = true)
+    public void GenerateEnemys(bool isStart = true, bool isFree = false)
     {
         GameObject Prefab = Resources.Load("Entity/Enemys/Enemy_Knight5_Axe") as GameObject;
         JsonMonsterStatus data = JsonMonsterStatus.CreateFromJSON(UserDataMgr.Instance.MonsterStatus);
@@ -48,6 +48,24 @@ public class EnemyGenerator : MonoBehaviour {
                 if (data.MonsterPosList.Count > 0)
                 {
                     GeneralPopup.Instance.OpenPopup(GeneralPopup.POPUP_STYLE.POPUP_STYLE_ONEBTN, "몬스터가 남아있습니다.", () => { });
+                    return;
+                }
+                else if(isFree)
+                {
+                    data = new JsonMonsterStatus();
+                    data.MonsterPosList = new List<string>();
+                    for (int i = 0; i < Enemys.transform.childCount; i++)
+                    {
+                        GameObject Obj = Instantiate(Prefab) as GameObject;
+
+                        Obj.transform.parent = Enemys.transform.GetChild(i);
+                        Obj.transform.position = Enemys.transform.GetChild(i).position;
+
+                        data.MonsterPosList.Add(Enemys.transform.GetChild(i).name);
+                    }
+
+                    UserDataMgr.Instance.MonsterStatus = data.SaveToString();
+                    UserDataMgr.Instance.SaveData();
                     return;
                 }
                 else
