@@ -64,6 +64,15 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zlib">
+      <HintPath>Assets\X-UniTMX\Ionic.Zlib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameAssets\Scripts\Ai\Ai.cs" />
@@ -81,6 +90,7 @@
     <Compile Include="Assets\GameAssets\Scripts\Entity\Enemy.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Entity\Entity.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Generator\EnemyGenerator.cs" />
+    <Compile Include="Assets\GameAssets\Scripts\Sns\SNSMGR.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Ui\Controller\AvatarController.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Ui\CustomButton.cs" />
     <Compile Include="Assets\GameAssets\Scripts\Ui\GeneralPopup.cs" />
@@ -94,11 +104,35 @@
     <Compile Include="Assets\StoredAssets\Medieval_Warriors_Pack\Scripts\Camera16x9.cs" />
     <Compile Include="Assets\StoredAssets\Medieval_Warriors_Pack\Scripts\Example_Motion_Attack_Shield_Controller.cs" />
     <Compile Include="Assets\StoredAssets\Medieval_Warriors_Pack\Scripts\Example_Motion_Controller.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\ImageLayer.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\Layer.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\Map.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\MapObject.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\MapObjectLayer.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\Object.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\Property.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\PropertyCollection.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\Tile.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\TileAnimation.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\TileGrid.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\TileLayer.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\TileObject.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\TileSet.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\TiledMapComponent.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\Utils\AnimatedSprite.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\Utils\MathfExtensions.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\Utils\SortingOrderAutoCalculator.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\Utils\TaskManager.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\Utils\Triangulator.cs" />
+    <Compile Include="Assets\X-UniTMX\Code\Utils\clipper.cs" />
+    <Compile Include="Assets\X-UniTMX\NanoXML\NanoXMLParser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Resources\Map\world.xml" />
     <None Include="Assets\StoredAssets\Medieval_Warriors_Pack\About_Shield_Mode.txt" />
     <None Include="Assets\StoredAssets\Medieval_Warriors_Pack\Contact_Info.txt" />
     <None Include="Assets\StoredAssets\spritefont_and_other\document_and_picturelist\readme.txt" />
+    <None Include="Assets\X-UniTMX\ObjectTypesForTiled.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

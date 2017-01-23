@@ -88,11 +88,23 @@
     <Reference Include="UnityEditor.Android.Extensions">
       <HintPath>Library\UnityAssemblies\UnityEditor.Android.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>Library\UnityAssemblies\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zlib">
+      <HintPath>Assets\X-UniTMX\Ionic.Zlib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -103,11 +115,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\TileMapMaker.cs" />
+    <Compile Include="Assets\X-UniTMX\Editor\GUIHelpers.cs" />
+    <Compile Include="Assets\X-UniTMX\Editor\TiledMapComponentEditor.cs" />
+    <Compile Include="Assets\X-UniTMX\Editor\TiledMapObjectsWindow.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Resources\Map\world.xml" />
     <None Include="Assets\StoredAssets\Medieval_Warriors_Pack\About_Shield_Mode.txt" />
     <None Include="Assets\StoredAssets\Medieval_Warriors_Pack\Contact_Info.txt" />
     <None Include="Assets\StoredAssets\spritefont_and_other\document_and_picturelist\readme.txt" />
+    <None Include="Assets\X-UniTMX\ObjectTypesForTiled.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
