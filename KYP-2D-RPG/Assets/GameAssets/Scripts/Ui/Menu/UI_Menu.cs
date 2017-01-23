@@ -36,6 +36,11 @@ public class UI_Menu : MonoBehaviour {
             case "save":
                 GeneralPopup.Instance.OpenPopup(GeneralPopup.POPUP_STYLE.POPUP_STYLE_TWOBTN, "정말로 저장합니까?", () => { UserDataMgr.Instance.SaveData(); }, ()=> { });
                 break;
+            case "setting":
+                break;
+            case "share":
+                GeneralPopup.Instance.OpenPopup(GeneralPopup.POPUP_STYLE.POPUP_STYLE_TWOBTN, "정말로 공유?", () => { SNSMGR.instance.ShareText(); }, () => { });
+                break;
         }
     }
 }
